@@ -1,0 +1,6 @@
+<p-dialog header="Student Portal" [(visible)]="display" (onHide) = "toggleDisplay()" modal="modal" width="400" [responsive]="true">
+        <p>{{message}}</p>
+            <p-footer>
+                <button type="button" pButton icon="fa-check" (click)="display=false" label="OK"></button>
+            </p-footer>
+</p-dialog>
