@@ -1,0 +1,10 @@
+<h4>Mode of Study</h4>
+<p-dropdown [options]="modes" [(ngModel)]="selectedMode"></p-dropdown>
+<h4>Program Type</h4>
+<p-dropdown [options]="types" [(ngModel)]="selectedType"></p-dropdown>
+<h4>Select Programme For Enrollment</h4>
+<p-dropdown  filter="true" [style]="{'width':'350px'}" [options]="programmes" [(ngModel)]="selectedProgramme"></p-dropdown>
+<h4>Upload the certicate copy of pre-qualification</h4>
+<p-fileUpload [style]="{'width':'500px'}" name="myfile[]" url="./upload.php"></p-fileUpload>
+<alert [message] = "message" [display] = "showalert"></alert>
+<button type="submit" (click)="proceed()">Submit</button>
