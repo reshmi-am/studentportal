@@ -19,12 +19,12 @@ export class AuthService {
                 email: email,
                 pwd: pwd
             }
-    
+
             let headers = new Headers({ 'Content-Type': 'application/json' });
             let options = new RequestOptions({ headers: headers });
             
             return this.http.post(this.URL + "auth", creds, options)
-                .map(res => res.json())
+                .map(res => res)
                 .catch((error:any) => Observable.throw(error || 'Server error'));
         }
 

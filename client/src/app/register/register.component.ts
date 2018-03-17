@@ -8,20 +8,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class CourseRegisterComponent {
-    modes: any = [
-        {label: "Online" , value:"Online"},
-        {label: "Distant", value:"Distant"},
-        {label: "Regular", value:"Regular"}
-    ]
-    types: any = [
-        {label: "Masters" , value:"Masters"},
-        {label: "Bachelors", value:"Bachelors"},
-        {label: "Diploma", value:"Diploma"},
-        {label: "Certificate", value:"Certificate"}
-    ]
-    programmes: any = [
 
-    ]
+    selectedMode: string = "";
+    selectedType: string = "";
+
+    programmes: any = [];
 
     courses: any;
 
@@ -45,5 +36,11 @@ export class CourseRegisterComponent {
     proceed(){
         this.showalert = true;
         this.message = "Thank you for registering. You will receive an email with payment directions.";
+    }
+
+    selectprogram(event){
+        console.log(event);
+        this.selectedMode = event.value.mode;
+        this.selectedType = event.value.type;
     }
 }

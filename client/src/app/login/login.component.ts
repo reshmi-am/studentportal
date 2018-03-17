@@ -13,8 +13,6 @@ export class LoginComponent {
 
     username:string;
     password:string;
-   
-    previousRoute: string;
 
     constructor(private service: AuthService,
                 private eventEmiter: EventEmitService,
@@ -25,15 +23,16 @@ export class LoginComponent {
 
         if(this.validateCredentials()){
             this.service.authenticateUser(this.username, this.password).
-            subscribe(response => this.handleLoginResponse(response));
+                    subscribe(response => this.handleLoginResponse(response));
         }
 
     }
 
     handleLoginResponse(response){
+        
         this.eventEmiter.emitLoginSuccess(response);
         this.service.setLoggedIn(response);
-        console.log(this.previousRoute);
+     
         this.router.navigateByUrl("/home");
     }
 
@@ -54,4 +53,4 @@ export class LoginComponent {
         return re.test(String(email).toLowerCase());
     
     }
-}
+} 

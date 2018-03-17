@@ -2,30 +2,18 @@ package studentportal.model;
 
 public class CourseInfo {
 
-	CourseInfo(){}
-	
-	public CourseInfo(String degree, String name, int duration, 
-			CourseMode mode, int fee, CourseType type){
-		this.degree = degree;
-		this.name = name;
-		this.durationInMonths = duration;
-		this.mode = mode;
-		this.fee = fee;
-		this.type = type;
-	}
-	
 	private String degree;
 	private String name;
 	private int durationInMonths;
-	private CourseMode mode;
-	private int fee;
-	private CourseType type;
+	private String mode;
+	private float fee;
+	private String type;
 	
-	public CourseType getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(CourseType type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 
@@ -53,19 +41,19 @@ public class CourseInfo {
 		this.durationInMonths = durationInMonths;
 	}
 
-	public CourseMode getMode() {
+	public String getMode() {
 		return mode;
 	}
 
-	public void setMode(CourseMode mode) {
+	public void setMode(String mode) {
 		this.mode = mode;
 	}
 
-	public int getFee() {
+	public float getFee() {
 		return fee;
 	}
 
-	public void setFee(int fee) {
+	public void setFee(float fee) {
 		this.fee = fee;
 	}
 }

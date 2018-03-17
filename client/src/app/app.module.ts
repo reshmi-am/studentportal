@@ -19,12 +19,14 @@ import { AuthService } from './services/auth.service';
 import { EventEmitService } from './services/eventemit.service';
 import { FormsModule } from '@angular/forms';
 import { AuthGuardLoggedIn } from './auth.guard';
+import { SignupComponent } from './signup/signup.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home' , pathMatch: 'full'},
   { path: 'home', component: HomeComponent },
   { path: 'courses', component: CourseComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignupComponent },
   { path: 'studentcourses', component: StudentsCourseComponent, canActivate: [AuthGuardLoggedIn] },
   { path: 'register', component: CourseRegisterComponent, canActivate: [AuthGuardLoggedIn] }
 ];
@@ -37,7 +39,8 @@ const appRoutes: Routes = [
     HomeComponent,
     LoginComponent,
     StudentsCourseComponent,
-    CourseRegisterComponent
+    CourseRegisterComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
