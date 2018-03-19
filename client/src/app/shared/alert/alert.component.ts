@@ -1,20 +1,21 @@
 
 import { Component, Input} from '@angular/core';
+import { WebEntity } from './../webentity';
 
 @Component({
   selector: 'alert',
   templateUrl: './alert.component.html'
 })
-export class AlertComponent {
+export class AlertComponent extends WebEntity{
 
     @Input() display: boolean = false;
-    @Input() message: string = "";
+    @Input() msg: string = "";
 
     showDialog() {
         this.display = true;
     }
-    toggleDisplay(){
+    hide(){
         this.display = false;
-        this.message = "";
+        this.msg = "";
     }
 }

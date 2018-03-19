@@ -3,6 +3,7 @@ import { AuthService } from '../services/auth.service';
 import { EventEmitter } from 'events';
 import { EventEmitService } from '../services/eventemit.service';
 import { Router } from '@angular/router';
+import { ValidatorService } from '../services/validator.service';
 
 @Component({
   selector: 'login',
@@ -15,6 +16,7 @@ export class LoginComponent {
     password:string;
 
     constructor(private service: AuthService,
+                private validator: ValidatorService,
                 private eventEmiter: EventEmitService,
                 private router: Router) {
     }
@@ -23,13 +25,13 @@ export class LoginComponent {
 
         if(this.validateCredentials()){
             this.service.authenticateUser(this.username, this.password).
-                    subscribe(response => this.handleLoginResponse(response));
+                    subscribe(response => this.handleLoginResponse(response.json()));
         }
 
     }
 
     handleLoginResponse(response){
-        
+    
         this.eventEmiter.emitLoginSuccess(response);
         this.service.setLoggedIn(response);
      
@@ -41,16 +43,9 @@ export class LoginComponent {
 
     validateCredentials(){
 
-        this.emailerror = !this.isValidEmail(this.username);
-        this.passworderror = !this.password || this.password.length < 6;
+        this.emailerror = !this.validator.isValidEmail(this.username);
+        this.passworderror = !this.validator.isValidPassword ( this.password );
       
         return !(this.emailerror || this.passworderror);
-    }
-
-    isValidEmail(email){
-        
-        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(String(email).toLowerCase());
-    
     }
 } 

@@ -1,22 +1,22 @@
 <div class="container">
   <label for="email" style="width:150px"><b>Email</b></label>
-  <input type="text" placeholder="Enter email" [(ngModel)]="email" required><span *ngIf="emailerror" class="error-class">Please enter valid email id...</span>
+  <input type="text" placeholder="Enter email" [(ngModel)]="user.email" required><span *ngIf="emailerror" class="error-class">Please enter valid email id...</span>
   <br>
   <label for="password"  style="width:150px"><b>Password</b></label>
-  <input type="password" placeholder="Enter Password" [(ngModel)]="password" required><span *ngIf="passworderror" class="error-class">Minimum 6 characters required...</span>
+  <input type="password" placeholder="Enter Password" [(ngModel)]="user.password" required><span *ngIf="passworderror" class="error-class">Minimum 6 characters required...</span>
 
   <label for="repeatpassword"  style="width:150px"><b>Repeat Password</b></label>
-  <input type="text" placeholder="Repeat Password" [(ngModel)]="reppassword" required><span *ngIf="passworderror" class="error-class">Minimum 6 characters required...</span>
+  <input type="text" placeholder="Repeat Password" [(ngModel)]="user.rpassword" required><span *ngIf="passworderror" class="error-class">Minimum 6 characters required...</span>
 
   <label for="firstname"  style="width:150px"><b>First name</b></label>
-  <input type="text" placeholder="Enter first name" [(ngModel)]="firstname" required><span *ngIf="passworderror" class="error-class">Minimum 6 characters required...</span>
+  <input type="text" placeholder="Enter first name" [(ngModel)]="user.firstname" required><span *ngIf="passworderror" class="error-class">Minimum 6 characters required...</span>
 
   <label for="lastname"  style="width:150px"><b>Last name</b></label>
-  <input type="text" placeholder="Enter last name" [(ngModel)]="lastname" required><span *ngIf="passworderror" class="error-class">Minimum 6 characters required...</span>
+  <input type="text" placeholder="Enter last name" [(ngModel)]="user.lastname" required><span *ngIf="passworderror" class="error-class">Minimum 6 characters required...</span>
 
   <label for="phone"  style="width:150px"><b>Phone</b></label>
-  <input type="text" placeholder="Enter phone" [(ngModel)]="phone" required><span *ngIf="passworderror" class="error-class">Minimum 6 characters required...</span>
+  <input type="text" placeholder="Enter phone" [(ngModel)]="user.phone" required><span *ngIf="passworderror" class="error-class">Minimum 6 characters required...</span>
 
   <button type="submit" (click)="signup()">Sign up</button>
-
+  <alert [msg] = "message" [display] = "showalert"></alert>
 </div>

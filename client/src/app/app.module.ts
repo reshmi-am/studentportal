@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { AlertComponent } from './alert.component';
+import { AlertComponent } from './shared/alert/alert.component';
 import { CourseComponent } from './courses/course.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -16,9 +16,11 @@ import { MenubarModule, DataTableModule,
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { StudentService } from './services/student.service';
 import { AuthService } from './services/auth.service';
+import { ValidatorService } from './services/validator.service';
 import { EventEmitService } from './services/eventemit.service';
 import { FormsModule } from '@angular/forms';
-import { AuthGuardLoggedIn } from './auth.guard';
+import { AuthGuardLoggedIn } from './shared/auth.guard';
+import { User } from './shared/model/user';
 import { SignupComponent } from './signup/signup.component';
 
 const appRoutes: Routes = [
@@ -57,7 +59,7 @@ const appRoutes: Routes = [
     DialogModule,
     FileUploadModule
   ],
-  providers: [StudentService, AuthService, EventEmitService, AuthGuardLoggedIn],
+  providers: [StudentService, AuthService, EventEmitService, AuthGuardLoggedIn, ValidatorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

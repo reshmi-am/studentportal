@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
+ 
 import studentportal.model.CourseInfo;
+import studentportal.model.Student;
 import studentportal.model.StudentsCourse;
 import studentportal.model.UserInfo;
 import studentportal.services.AuthService;
@@ -37,16 +38,22 @@ public class PortalController {
         return service.getAllCourses();
     }
     
+    @RequestMapping(value="/student", method = RequestMethod.POST, consumes = "application/json")
+    public void signUp(@RequestBody UserInfo user) {
+    	
+    	service.signUpUser(user);
+    }
+    
     @RequestMapping("/courses/{id}")
     public @ResponseBody List<StudentsCourse> getCoursesForStudent(@PathVariable("id") int studentid) {
-    	logger.info("In getCoursesForStudent : " + studentid);
         return service.getCourseForStudent(studentid);
     }
     
     @RequestMapping(value="/auth", method = RequestMethod.POST, consumes = "application/json")
-    public @ResponseBody UserInfo authenticateUser(@RequestBody UserInfo user) {
+    public @ResponseBody Student authenticateUser(@RequestBody UserInfo user) throws Exception {
     	
-        return authservice.getUserInfo(user.getEmail(), user.getPwd());
+        return authservice.authenticate(user.getEmail(), user.getPwd());
     }
+    
 }
 	

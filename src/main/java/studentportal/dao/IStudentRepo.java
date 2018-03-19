@@ -6,4 +6,5 @@ import studentportal.model.Student;
 
 public interface IStudentRepo extends JpaRepository<Student, Integer>{
 
+	Student findByEmail(String email);
 }
