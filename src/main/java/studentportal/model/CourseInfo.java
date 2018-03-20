@@ -2,6 +2,7 @@ package studentportal.model;
 
 public class CourseInfo {
 
+	private int id;
 	private String degree;
 	private String name;
 	private int durationInMonths;
@@ -9,6 +10,14 @@ public class CourseInfo {
 	private float fee;
 	private String type;
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getType() {
 		return type;
 	}

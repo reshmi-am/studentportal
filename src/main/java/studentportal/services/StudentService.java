@@ -1,6 +1,8 @@
 package studentportal.services;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import studentportal.dao.ICourseMode;
 import studentportal.dao.ICourseRepo;
 import studentportal.dao.ICourseTypeRepo;
 import studentportal.dao.ICredentialRepo;
+import studentportal.dao.IStudentCourse;
 import studentportal.dao.IStudentRepo;
 import studentportal.model.Course;
 import studentportal.model.CourseInfo;
@@ -38,6 +41,9 @@ public class StudentService {
 	@Autowired
 	private ICredentialRepo credentialDAO;
 	
+	@Autowired
+	private IStudentCourse studentCoursesDAO;
+	
 	public List<CourseInfo> getAllCourses(){
 		
 		List<Course> courses = courseDAO.findAll();
@@ -56,6 +62,7 @@ public class StudentService {
 		for(Course course : courses){
 			
 			CourseInfo info = new CourseInfo();
+			info.setId(course.getId());
 			info.setDegree(course.getDegree());
 			info.setName(course.getName());
 			info.setDurationInMonths(course.getDuration());
@@ -91,9 +98,17 @@ public class StudentService {
 		return "";
 	}
 
-	public List<StudentsCourse> getCourseForStudent(int studentId){
+	public List<CourseInfo> getCourseForStudent(int studentId){
 		
-		return null;
+		List<StudentsCourse> studentCourses = studentCoursesDAO.findByStudentId(studentId);
+		
+		List<Course> courses = new ArrayList<Course>();
+		for(StudentsCourse sc : studentCourses){
+			Course c = courseDAO.findOne(sc.getCourseId());
+			courses.add(c);
+		}
+		
+		return this.mapCourseDetails(courses);
 	}
 
 	public void signUpUser(UserInfo user) {
@@ -111,4 +126,18 @@ public class StudentService {
 		studentDAO.save(student);
 		credentialDAO.save(crd);
 	}
+
+	public void registercourse(int studentid, int courseid) {
+		StudentsCourse sc = new StudentsCourse();
+		sc.setStudentId(studentid);
+		sc.setCourseId(courseid);
+		sc.setStatus(1); /*NEW status */
+
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String mysqlDateString = formatter.format(new Date() /*now*/);
+		sc.setDoj(mysqlDateString);
+		
+		StudentsCourse savedsc = studentCoursesDAO.save(sc);
+	}
+
 }

@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
- 
+import org.springframework.web.multipart.MultipartFile;
+
 import studentportal.model.CourseInfo;
 import studentportal.model.Student;
 import studentportal.model.StudentsCourse;
@@ -42,7 +43,8 @@ public class PortalController {
     }
     
     @RequestMapping("/courses/{id}")
-    public @ResponseBody List<StudentsCourse> getCoursesForStudent(@PathVariable("id") int studentid) {
+    public @ResponseBody List<CourseInfo> getCoursesForStudent(@PathVariable("id") int studentid) {
+    	
         return service.getCourseForStudent(studentid);
     }
     
@@ -52,5 +54,10 @@ public class PortalController {
         return authservice.authenticate(user.getEmail(), user.getPwd());
     }
     
+    @RequestMapping(value="/registration", method = RequestMethod.POST, consumes = "application/json")
+    public void authenticateUser(@RequestBody StudentsCourse sc) throws Exception {
+    	
+        service.registercourse(sc.getStudentId(), sc.getCourseId());
+    }
 }
 	

@@ -1,90 +1,59 @@
 package studentportal.model;
 
-import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "student_courses")
 public class StudentsCourse {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idstudent_courses")
+	private int id;
+	
+	@Column(name = "student_id")
 	private int studentId;
-	private CourseStatus status;
-	private Date doj;
-	private String degree;
-	private String name;
-	private int durationInMonths;
-	private CourseMode mode;
-	private int fee;
-	private CourseType type;
 	
-	public StudentsCourse(){
-		
+	@Column(name = "course_id")
+	private int courseId;
+	private String doj;
+	private int status;
+	
+	public int getId() {
+		return id;
 	}
-	
-	public StudentsCourse(int studentId, CourseStatus status, Date doj, String degree, String name,
-			int durationInMonths, CourseMode mode, int fee, CourseType type) {
-		super();
-		this.studentId = studentId;
-		this.status = status;
-		this.doj = doj;
-		this.degree = degree;
-		this.name = name;
-		this.durationInMonths = durationInMonths;
-		this.mode = mode;
-		this.fee = fee;
-		this.type = type;
+	public void setId(int id) {
+		this.id = id;
 	}
-	
+
 	public int getStudentId() {
 		return studentId;
 	}
 	public void setStudentId(int studentId) {
 		this.studentId = studentId;
 	}
-	public CourseStatus getStatus() {
-		return status;
+	public int getCourseId() {
+		return courseId;
 	}
-	public void setStatus(CourseStatus status) {
-		this.status = status;
+	public void setCourseId(int courseId) {
+		this.courseId = courseId;
 	}
-	public Date getDoj() {
+	public String getDoj() {
 		return doj;
 	}
-	public void setDoj(Date doj) {
+	public void setDoj(String doj) {
 		this.doj = doj;
 	}
-	public String getDegree() {
-		return degree;
+	public int getStatus() {
+		return status;
 	}
-	public void setDegree(String degree) {
-		this.degree = degree;
+	public void setStatus(int status) {
+		this.status = status;
 	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public int getDurationInMonths() {
-		return durationInMonths;
-	}
-	public void setDurationInMonths(int durationInMonths) {
-		this.durationInMonths = durationInMonths;
-	}
-	public CourseMode getMode() {
-		return mode;
-	}
-	public void setMode(CourseMode mode) {
-		this.mode = mode;
-	}
-	public int getFee() {
-		return fee;
-	}
-	public void setFee(int fee) {
-		this.fee = fee;
-	}
-	public CourseType getType() {
-		return type;
-	}
-	public void setType(CourseType type) {
-		this.type = type;
-	}
-	
+
 }

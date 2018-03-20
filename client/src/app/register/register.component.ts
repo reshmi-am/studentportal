@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { StudentService } from '../services/student.service';
+import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { WebEntity } from '../shared/webentity';
 
@@ -14,10 +15,12 @@ export class CourseRegisterComponent extends WebEntity{
     selectedType: string = "";
 
     programmes: any = [];
-
+    selectedProgramme: any;
+    
     courses: any;
 
     constructor(private service: StudentService,
+                private authservice: AuthService,
                 private router: Router) {
                     super();
     }
@@ -34,11 +37,18 @@ export class CourseRegisterComponent extends WebEntity{
     }
 
     proceed(){
-        this.showAlert("Thank you for registering. You will receive an email with payment directions.");
+
+        this.service.registerCourse(this.authservice.getUser().id, this.selectedProgramme.id).
+                subscribe(response =>{ this.handleRegistrationSuccess()});
+        
     }
 
-    selectprogram(event){
+    handleRegistrationSuccess(){
         
+        this.router.navigateByUrl("/studentcourses");
+    }
+
+    selectprogram(event){  
         this.selectedMode = event.value.mode;
         this.selectedType = event.value.type;
     }

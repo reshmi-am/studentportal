@@ -41,4 +41,20 @@ export class StudentService {
             .map(res => res)
             .catch((error:any) => Observable.throw(error || 'Server error'));
     }
+
+    registerCourse(studentid: number, courseid:number ): Observable<any> {
+
+        var request  = {
+            studentId: studentid,
+            courseId: courseid,
+        }
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post(this.URL + "registration" , request, options)
+                .map((res:Response) => res)
+                .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+    
+    }
+
 }
